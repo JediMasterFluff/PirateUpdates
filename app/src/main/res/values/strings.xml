@@ -5,4 +5,5 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="SplashString">WELCOME\nTO ALL\nYOUR PIRATING UPDATES</string>
     <string name="edit_title">title</string>
+    <string name="desc">testing description</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.applications.fluffy.piratingupdates;
+package com.applications.fluffy.piratingupdates.Objects;
 
 /**
  * Created by fluffy on 03/02/17.
@@ -30,7 +30,7 @@ public class Torrents {
 
     @Override
     public String toString() {
-        return "com.applications.fluffy.piratingupdates.Torrents{" +
+        return "com.applications.fluffy.piratingupdates.Objects.Torrents{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", torrentLink='" + torrentLink + '\'' +

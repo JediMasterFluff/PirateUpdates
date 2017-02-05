@@ -1,14 +1,10 @@
-package com.applications.fluffy.piratingupdates;
+package com.applications.fluffy.piratingupdates.Activities;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.MotionEvent;
-import android.view.View;
+
+import com.applications.fluffy.piratingupdates.R;
 
 
 public class SplashScreen extends Activity implements Runnable {
