@@ -1,5 +1,9 @@
 package com.applications.fluffy.piratingupdates.Objects;
 
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by fluffy on 03/02/17.
  */
@@ -12,42 +16,36 @@ public class Torrents {
     private String torrentDownloadLink;
     private String posterImgLink;
     private String genre;
+    private String size;
+    private String runtime;
     private String pubDate;
-    private Double imdbRating;
+    private String imdbRating;
     private Double rottenRating;
     private int seeders;
     private int peers;
 
     public Torrents() {
-
         this.title = "";
         this.description = "";
         this.torrentWebLink = "";
         this.torrentDownloadLink = "";
         this.posterImgLink = "";
         this.genre = "";
+        this.size = "";
+        this.runtime = "";
         this.pubDate = "";
-        this.imdbRating = 0.0;
+        this.imdbRating = "";
         this.rottenRating = 0.0;
         this.seeders = 0;
         this.peers = 0;
     }
 
-    @Override
-    public String toString() {
-        return "com.applications.fluffy.piratingupdates.Objects.Torrents{" +
-                "name='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", torrentWebLink='" + torrentWebLink + '\'' +
-                ", torrentDownloadLink='" + torrentDownloadLink + '\'' +
-                ", posterImgLink='" + posterImgLink + '\'' +
-                ", genre='" + genre + '\'' +
-                ", pubDate='" + pubDate + '\'' +
-                ", imdbRating=" + imdbRating +
-                ", rottenRating=" + rottenRating +
-                ", seeders=" + seeders +
-                ", peers=" + peers +
-                '}';
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -55,6 +53,14 @@ public class Torrents {
     }
 
     public void setDescription(String description) {
+
+        Pattern pattern = Pattern.compile("<img src=(.*?) alt");
+        Matcher matcher = pattern.matcher(description);
+        if(matcher.find()){
+            System.out.print("Description Matcher : ");
+            this.setPosterImgLink(matcher.group(1));
+        }
+
         this.description = description;
     }
 
@@ -62,8 +68,16 @@ public class Torrents {
         return torrentWebLink;
     }
 
-    public void setTorrentLink(String torrentLink) {
-        this.torrentWebLink = torrentLink;
+    public void setTorrentWebLink(String torrentWebLink) {
+        this.torrentWebLink = torrentWebLink;
+    }
+
+    public String getTorrentDownloadLink() {
+        return torrentDownloadLink;
+    }
+
+    public void setTorrentDownloadLink(String torrentDownloadLink) {
+        this.torrentDownloadLink = torrentDownloadLink;
     }
 
     public String getPosterImgLink() {
@@ -82,11 +96,35 @@ public class Torrents {
         this.genre = genre;
     }
 
-    public Double getImdbRating() {
+    public String getSize() {
+        return size;
+    }
+
+    private void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getRuntime() {
+        return runtime;
+    }
+
+    private void setRuntime(String runtime) {
+        this.runtime = runtime;
+    }
+
+    public String getPubDate() {
+        return pubDate;
+    }
+
+    public void setPubDate(String pubDate) {
+        this.pubDate = pubDate;
+    }
+
+    public String getImdbRating() {
         return imdbRating;
     }
 
-    private void setImdbRating(Double imdbRating) {
+    public void setImdbRating(String imdbRating) {
         this.imdbRating = imdbRating;
     }
 
@@ -112,33 +150,5 @@ public class Torrents {
 
     public void setPeers(int peers) {
         this.peers = peers;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setTorrentWebLink(String torrentWebLink) {
-        this.torrentWebLink = torrentWebLink;
-    }
-
-    public void setTorrentDownloadLink(String torrentDownloadLink) {
-        this.torrentDownloadLink = torrentDownloadLink;
-    }
-
-    public String getTorrentDownloadLink() {
-        return torrentDownloadLink;
-    }
-
-    public String getPubDate() {
-        return pubDate;
-    }
-
-    public void setPubDate(String pubDate) {
-        this.pubDate = pubDate;
     }
 }
