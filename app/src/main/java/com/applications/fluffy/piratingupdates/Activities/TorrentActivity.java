@@ -1,15 +1,17 @@
 package com.applications.fluffy.piratingupdates.Activities;
 
-import android.app.Activity;
 import android.os.Bundle;
+
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.applications.fluffy.piratingupdates.Loaders.ImageLoadTask;
 import com.applications.fluffy.piratingupdates.R;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-public class TorrentActivity extends Activity {
+public class TorrentActivity extends AppCompatActivity {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -28,14 +30,20 @@ public class TorrentActivity extends Activity {
         /*
         Intent intent = getIntent();
         String title = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-
-        this.setTitle(title);
         */
 
+        android.app.ActionBar bar = this.getActionBar();
+        this.setTitle("Torrent Activity Screen");
+
+//        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#A123A1")));
 
         setContentView(R.layout.activity_torrent);
 
-        addListenerOnButton();
+        imv = (ImageView)findViewById(R.id.torrent_poster);
+
+        new ImageLoadTask("https://yts.ag/assets/images/movies/manchester_by_the_sea_2016/medium-cover.jpg", imv).execute();
+
+//        addListenerOnButton();
     }
     private void addListenerOnButton(){
         imv = (ImageView) findViewById(R.id.torrent_poster);
@@ -51,3 +59,5 @@ public class TorrentActivity extends Activity {
     }
 
 }
+
+
