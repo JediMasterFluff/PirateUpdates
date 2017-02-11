@@ -1,10 +1,8 @@
 package com.applications.fluffy.piratingupdates.Loaders;
 
-import android.app.ListActivity;
 import android.os.AsyncTask;
-import android.support.v4.os.AsyncTaskCompat;
 
-import com.applications.fluffy.piratingupdates.Objects.XMLParserBean;
+import com.applications.fluffy.piratingupdates.Objects.Torrents;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -20,6 +18,10 @@ import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 /**
  * Created by fluffy on 10/02/17.
@@ -27,18 +29,19 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class XMLParser extends AsyncTask<Void, Void, Void> {
 
-    XMLParserBean objBean;
-    Vector<XMLParserBean> vectParse;
+    private Torrents objTor;
+    private Vector<Torrents> vectParse;
 
-    int mediaThumbnailCount;
-    boolean urlflag;
-    int count = 0;
+    private int mediaThumbnailCount;
+    private boolean urlflag;
+    private int count = 0;
 
-    public XMLParser() {
+    @Override
+    protected Void doInBackground(Void... params) {
         try {
 
-            vectParse = new Vector<XMLParserBean>();
-            URL url = new URL("http://news.yahoo.com/rss/politics");
+            vectParse = new Vector<>();
+            URL url = new URL("https://yts.ag/rss/0/1080p/all/0");
             URLConnection con = url.openConnection();
 
             System.out.println("Connection is : " + con);
@@ -54,13 +57,11 @@ public class XMLParser extends AsyncTask<Void, Void, Void> {
 
             InputStream istream = url.openStream();
 
-            DocumentBuilder builder = DocumentBuilderFactory.newInstance()
-                    .newDocumentBuilder();
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
             Document doc = builder.parse(istream);
 
             doc.getDocumentElement().normalize();
-
 
             NodeList nList = doc.getElementsByTagName("item");
 
@@ -73,30 +74,32 @@ public class XMLParser extends AsyncTask<Void, Void, Void> {
 
                     Element eElement = (Element) nNode;
 
-                    objBean = new XMLParserBean();
-                    vectParse.add(objBean);
+                    objTor = new Torrents();
+                    vectParse.add(objTor);
 
-                    objBean.title = getTagValue("title", eElement);
-                    objBean.description = getTagValue("description", eElement);
-                    String noHTMLString = objBean.description.replaceAll("\\<.*?\\>", "");
-                    objBean.description=noHTMLString;
-                    objBean.link = getTagValue("link", eElement);
-                    objBean.pubdate = getTagValue("pubDate", eElement);
+                    objTor.setTitle(getTagValue("title", eElement));
+                    objTor.setDescription(getTagValue("description", eElement));
+                    //objTor.setTitle(objTor.getDescription().replaceAll("\\<.*?\\);>", "|"));
+                    objTor.setTorrentWebLink(getTagValue("link", eElement));
+                    objTor.setTorrentDownloadLink(getTagAttributes("enclosure", eElement, "//rss/channel/item/enclosure/@url"));
+                    objTor.setPubDate(getTagValue("pubDate", eElement));
+                    //objTor.setPosterImgLink(getTagAttributes("description", eElement, "//rss/channel/item/description/img/@src"));
 
                 }
             }
 
             for (int index1 = 0; index1 < vectParse.size(); index1++) {
-                XMLParserBean ObjNB = (XMLParserBean) vectParse
-                        .get(index1);
+                Torrents ObjNB = vectParse.get(index1);
 
                 System.out.println("Item No : " + index1);
                 System.out.println();
 
-                System.out.println("Title is : " + ObjNB.title);
-                System.out.println("Description is : " + ObjNB.description);
-                System.out.println("Link is : " + ObjNB.link);
-                System.out.println("Pubdate is : " + ObjNB.pubdate);
+                System.out.println("Title is : " + ObjNB.getTitle());
+                System.out.println("Description is : " + ObjNB.getDescription());
+                System.out.println("Link is : " + ObjNB.getTorrentWebLink());
+                System.out.println("Enclosure is : " + ObjNB.getTorrentDownloadLink());
+                System.out.println("Pubdate is : " + ObjNB.getPubDate());
+                System.out.println("Image Link is : " + ObjNB.getPosterImgLink());
 
                 System.out.println();
                 System.out
@@ -107,10 +110,6 @@ public class XMLParser extends AsyncTask<Void, Void, Void> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected Void doInBackground(Void... params) {
         return null;
     }
 
@@ -118,14 +117,27 @@ public class XMLParser extends AsyncTask<Void, Void, Void> {
         NodeList nlList = eElement.getElementsByTagName(sTag).item(0)
                 .getChildNodes();
 
-        Node nValue = (Node) nlList.item(0);
+        Node nValue = nlList.item(0);
 
         return nValue.getNodeValue();
 
     }
 
-    public void runParser() {
-        new XMLParserBean();
-    }
+    private String getTagAttributes(String sTag, Element eElement, String path) {
 
+        XPath xpath =  XPathFactory.newInstance().newXPath();
+
+        try {
+            NodeList node = (NodeList) xpath.evaluate(path, eElement, XPathConstants.NODESET);
+            Node nValue = node.item(0);
+
+            return nValue.getNodeValue();
+
+        } catch (XPathExpressionException e) {
+            e.printStackTrace();
+        }
+
+
+        return null;
+    }
 }

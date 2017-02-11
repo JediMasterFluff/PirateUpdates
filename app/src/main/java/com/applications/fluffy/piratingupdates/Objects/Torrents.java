@@ -6,22 +6,27 @@ package com.applications.fluffy.piratingupdates.Objects;
 
 public class Torrents {
     //Attributes
-    private String name;
+    private String title;
     private String description;
-    private String torrentLink;
+    private String torrentWebLink;
+    private String torrentDownloadLink;
     private String posterImgLink;
     private String genre;
+    private String pubDate;
     private Double imdbRating;
     private Double rottenRating;
     private int seeders;
     private int peers;
 
-    public Torrents(){
-        this.name = "";
+    public Torrents() {
+
+        this.title = "";
         this.description = "";
-        this.torrentLink = "";
+        this.torrentWebLink = "";
+        this.torrentDownloadLink = "";
         this.posterImgLink = "";
         this.genre = "";
+        this.pubDate = "";
         this.imdbRating = 0.0;
         this.rottenRating = 0.0;
         this.seeders = 0;
@@ -31,11 +36,13 @@ public class Torrents {
     @Override
     public String toString() {
         return "com.applications.fluffy.piratingupdates.Objects.Torrents{" +
-                "name='" + name + '\'' +
+                "name='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", torrentLink='" + torrentLink + '\'' +
+                ", torrentWebLink='" + torrentWebLink + '\'' +
+                ", torrentDownloadLink='" + torrentDownloadLink + '\'' +
                 ", posterImgLink='" + posterImgLink + '\'' +
                 ", genre='" + genre + '\'' +
+                ", pubDate='" + pubDate + '\'' +
                 ", imdbRating=" + imdbRating +
                 ", rottenRating=" + rottenRating +
                 ", seeders=" + seeders +
@@ -51,12 +58,12 @@ public class Torrents {
         this.description = description;
     }
 
-    public String getTorrentLink() {
-        return torrentLink;
+    public String getTorrentWebLink() {
+        return torrentWebLink;
     }
 
     public void setTorrentLink(String torrentLink) {
-        this.torrentLink = torrentLink;
+        this.torrentWebLink = torrentLink;
     }
 
     public String getPosterImgLink() {
@@ -71,7 +78,7 @@ public class Torrents {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    private void setGenre(String genre) {
         this.genre = genre;
     }
 
@@ -79,7 +86,7 @@ public class Torrents {
         return imdbRating;
     }
 
-    public void setImdbRating(Double imdbRating) {
+    private void setImdbRating(Double imdbRating) {
         this.imdbRating = imdbRating;
     }
 
@@ -107,12 +114,31 @@ public class Torrents {
         this.peers = peers;
     }
 
-    public String getName() {
-
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setTorrentWebLink(String torrentWebLink) {
+        this.torrentWebLink = torrentWebLink;
+    }
+
+    public void setTorrentDownloadLink(String torrentDownloadLink) {
+        this.torrentDownloadLink = torrentDownloadLink;
+    }
+
+    public String getTorrentDownloadLink() {
+        return torrentDownloadLink;
+    }
+
+    public String getPubDate() {
+        return pubDate;
+    }
+
+    public void setPubDate(String pubDate) {
+        this.pubDate = pubDate;
     }
 }
