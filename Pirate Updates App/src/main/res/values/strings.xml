@@ -6,4 +6,11 @@
     <string name="SplashString">WELCOME\nTO ALL\nYOUR PIRATING UPDATES</string>
     <string name="edit_title">title</string>
     <string name="desc">testing description</string>
+    <string name="rating">Rating:</string>
+    <string name="download">Download</string>
+    <string name="genre">Genre:</string>
+    <string name="publication_date">PubDate:</string>
+    <string name="runtime">Runtime:</string>
+    <string name="size">Size:</string>
+    <string name="torrent_image_poster_here">Torrent Image Poster Here</string>
 </resources>

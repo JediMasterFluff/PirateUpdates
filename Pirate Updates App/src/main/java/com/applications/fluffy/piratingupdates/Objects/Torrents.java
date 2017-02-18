@@ -1,5 +1,9 @@
 package com.applications.fluffy.piratingupdates.Objects;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -10,7 +14,8 @@ import java.util.regex.Pattern;
  * Created by fluffy on 03/02/17.
  */
 
-public class Torrents {
+@SuppressWarnings("serial")
+public class Torrents implements Serializable {
     //Attributes
     private String title;
     private String description;
@@ -51,6 +56,8 @@ public class Torrents {
     }
 
     public void setDescription(String description) {
+
+        setPosterImgLink(description);
 
         String replaceStr = description.replaceAll("\\<.*?\\>", "|").trim();
 
@@ -102,12 +109,12 @@ public class Torrents {
         return posterImgLink;
     }
 
-    public void setPosterImgLink(String posterImgLink) {
+    private void setPosterImgLink(String posterImgLink) {
 
         Pattern pattern = Pattern.compile("<img src=(.*?) alt");
         Matcher matcher = pattern.matcher(posterImgLink);
         if(matcher.find())
-            this.posterImgLink = matcher.group(1);
+            this.posterImgLink = matcher.group(1).replace("\"", "");
 
     }
 

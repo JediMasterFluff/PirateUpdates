@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -27,7 +28,7 @@ import javax.xml.xpath.XPathFactory;
  * Created by fluffy on 10/02/17.
  */
 
-public class XMLParser extends AsyncTask<Void, Void, Void> {
+public class XMLParser extends AsyncTask<Void, Void, Vector<Torrents>> {
 
     private Torrents objTor;
     private Vector<Torrents> vectParse;
@@ -37,7 +38,7 @@ public class XMLParser extends AsyncTask<Void, Void, Void> {
     private int count = 0;
 
     @Override
-    protected Void doInBackground(Void... params) {
+    protected Vector<Torrents> doInBackground(Void... params) {
         try {
 
             vectParse = new Vector<>();
@@ -79,7 +80,7 @@ public class XMLParser extends AsyncTask<Void, Void, Void> {
 
                     objTor.setTitle(getTagValue("title", eElement));
                     objTor.setDescription(getTagValue("description", eElement));
-                    objTor.setPosterImgLink(objTor.getDescription().replaceAll("\\<.*?\\>", "|"));
+                    //objTor.setPosterImgLink(objTor.getDescription().replaceAll("\\<.*?\\>", "|"));
                     objTor.setTorrentWebLink(getTagValue("link", eElement));
                     objTor.setTorrentDownloadLink(getTagAttributes("enclosure", eElement, "//rss/channel/item/enclosure/@url"));
                     objTor.setPubDate(getTagValue("pubDate", eElement));
@@ -97,6 +98,7 @@ public class XMLParser extends AsyncTask<Void, Void, Void> {
                 System.out.println("Description is : " + ObjNB.getDescription());
                 System.out.println("Link is : " + ObjNB.getTorrentWebLink());
                 System.out.println("Download Link is : " + ObjNB.getTorrentDownloadLink());
+                System.out.println("Image Line is : " + ObjNB.getPosterImgLink());
                 System.out.println("Pubdate is : " + ObjNB.getPubDate());
                 System.out.println("IMDB Rating is : " + ObjNB.getImdbRating());
                 System.out.println("Genre is : " + ObjNB.getGenre());
@@ -111,7 +113,7 @@ public class XMLParser extends AsyncTask<Void, Void, Void> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return vectParse;
     }
 
     private String getTagValue(String sTag, Element eElement) {
@@ -138,5 +140,15 @@ public class XMLParser extends AsyncTask<Void, Void, Void> {
         }
 
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(Vector<Torrents> torrentses) {
+        super.onPostExecute(torrentses);
+        returnVector(torrentses);
+    }
+
+    private Vector<Torrents> returnVector(Vector<Torrents> torrentses) {
+        return torrentses;
     }
 }

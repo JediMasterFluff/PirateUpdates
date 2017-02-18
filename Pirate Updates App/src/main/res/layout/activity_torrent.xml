@@ -27,6 +27,7 @@
             android:id="@+id/torrent_poster"
             app:layout_column="0"
             app:layout_row="0"
+            android:contentDescription="@string/torrent_image_poster_here"
             />
 
         <TableLayout
@@ -38,30 +39,66 @@
             android:clickable="false"
             android:cursorVisible="false"
             android:focusable="false"
-            android:focusableInTouchMode="false">
+            android:focusableInTouchMode="false"
+            android:paddingLeft="20px"
+            android:paddingTop="30px">
 
             <TableRow>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Rating: "/>
+                    android:text="@string/rating"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5.5"
-                    android:gravity="right" />
+                    android:gravity="right"
+                    android:id="@+id/imdbRating"
+                    tools:ignore="RtlHardcoded" />
             </TableRow>
 
             <TableRow>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name:" />
+                    android:text="@string/genre" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Testing Torrent"
-                    android:gravity="right" />
+                    android:gravity="end"
+                    android:id="@+id/genre"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/runtime" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:id="@+id/runtime"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/size" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:id="@+id/size"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/publication_date" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:id="@+id/pubdate"/>
             </TableRow>
         </TableLayout>
 
@@ -81,7 +118,7 @@
             android:text="@string/desc"/>
 
         <Button
-            android:text="Download"
+            android:text="@string/download"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/torrent_download"

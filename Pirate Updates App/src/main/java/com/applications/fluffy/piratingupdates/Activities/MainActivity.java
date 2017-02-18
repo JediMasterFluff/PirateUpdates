@@ -7,27 +7,40 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.applications.fluffy.piratingupdates.Loaders.XMLParser;
+import com.applications.fluffy.piratingupdates.Objects.Torrents;
 import com.applications.fluffy.piratingupdates.R;
 
+import java.util.Vector;
+import java.util.concurrent.ExecutionException;
+
 public class MainActivity extends AppCompatActivity {
-    public final static String EXTRA_MESSAGE = "com.fluffy.pirateupdate.MESSAGE";
+    public final static String EXTRA_MESSAGE = "Torrent Object";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    public void sendTitle(View view){
-        // Do something here
-        Intent intent = new Intent(this, TorrentActivity.class);
-        EditText editText = (EditText) findViewById(R.id.editTitle);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
-    }
 
     public void readRss(View view){
 
-        new XMLParser().execute();
+        try {
+            XMLParser parse = new XMLParser();
+
+            parse.execute();
+
+            Vector<Torrents> vector = parse.get();
+
+            Intent intent = new Intent(this, TorrentActivity.class);
+
+            intent.putExtra(EXTRA_MESSAGE, vector.elementAt(0));
+            startActivity(intent);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
