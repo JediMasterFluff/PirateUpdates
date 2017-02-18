@@ -75,7 +75,8 @@ public class testView extends View{
     @Override
     protected void onDraw(Canvas canvas){
         super .onDraw(canvas);
-        Paint paint = new Paint();
+        Paint paint;
+        paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.GRAY);
         canvas.drawPaint(paint);

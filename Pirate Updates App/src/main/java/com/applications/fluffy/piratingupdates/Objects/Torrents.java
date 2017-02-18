@@ -1,6 +1,8 @@
 package com.applications.fluffy.piratingupdates.Objects;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,8 +23,6 @@ public class Torrents {
     private String pubDate;
     private String imdbRating;
     private Double rottenRating;
-    private int seeders;
-    private int peers;
 
     public Torrents() {
         this.title = "";
@@ -36,8 +36,6 @@ public class Torrents {
         this.pubDate = "";
         this.imdbRating = "";
         this.rottenRating = 0.0;
-        this.seeders = 0;
-        this.peers = 0;
     }
 
     public String getTitle() {
@@ -54,14 +52,34 @@ public class Torrents {
 
     public void setDescription(String description) {
 
-        Pattern pattern = Pattern.compile("<img src=(.*?) alt");
-        Matcher matcher = pattern.matcher(description);
-        if(matcher.find()){
-            System.out.print("Description Matcher : ");
-            this.setPosterImgLink(matcher.group(1));
-        }
+        String replaceStr = description.replaceAll("\\<.*?\\>", "|").trim();
 
-        this.description = description;
+        ArrayList<String> descArr = new ArrayList<>(Arrays.asList(replaceStr.split("\\|")));
+
+        for (String str : descArr) {
+            if (str.length() != 0) {
+                switch (str.substring(0, 4)) {
+                    case "IMDB":
+                        setImdbRating(str);
+                        break;
+                    case "Genr":
+                        setGenre(str);
+                        break;
+                    case "Size":
+                        setSize(str);
+                        break;
+                    case "Runt":
+                        setRuntime(str);
+                        break;
+                    default:
+                        this.description = str;
+                        break;
+                }
+
+                System.out.println("~~~~~~~~~~~ Substring ~~~~~~~~~~~");
+                System.out.println(str.substring(0, 3));
+            }
+        }
     }
 
     public String getTorrentWebLink() {
@@ -85,7 +103,12 @@ public class Torrents {
     }
 
     public void setPosterImgLink(String posterImgLink) {
-        this.posterImgLink = posterImgLink;
+
+        Pattern pattern = Pattern.compile("<img src=(.*?) alt");
+        Matcher matcher = pattern.matcher(posterImgLink);
+        if(matcher.find())
+            this.posterImgLink = matcher.group(1);
+
     }
 
     public String getGenre() {
@@ -93,7 +116,7 @@ public class Torrents {
     }
 
     private void setGenre(String genre) {
-        this.genre = genre;
+        this.genre = genre.replace("Genre: ", "");
     }
 
     public String getSize() {
@@ -101,7 +124,7 @@ public class Torrents {
     }
 
     private void setSize(String size) {
-        this.size = size;
+        this.size = size.replace("Size: ", "");
     }
 
     public String getRuntime() {
@@ -109,7 +132,7 @@ public class Torrents {
     }
 
     private void setRuntime(String runtime) {
-        this.runtime = runtime;
+        this.runtime = runtime.replace("Runtime: ", "");
     }
 
     public String getPubDate() {
@@ -124,8 +147,8 @@ public class Torrents {
         return imdbRating;
     }
 
-    public void setImdbRating(String imdbRating) {
-        this.imdbRating = imdbRating;
+    private void setImdbRating(String imdbRating) {
+        this.imdbRating = imdbRating.replace("IMDB Rating: ", "");
     }
 
     public Double getRottenRating() {
@@ -136,19 +159,4 @@ public class Torrents {
         this.rottenRating = rottenRating;
     }
 
-    public int getSeeders() {
-        return seeders;
-    }
-
-    public void setSeeders(int seeders) {
-        this.seeders = seeders;
-    }
-
-    public int getPeers() {
-        return peers;
-    }
-
-    public void setPeers(int peers) {
-        this.peers = peers;
-    }
 }

@@ -33,8 +33,7 @@ public class ImageLoadTask extends AsyncTask<Void,Void, Bitmap> {
             httpConn.setDoInput(true);
             httpConn.connect();
             InputStream is = httpConn.getInputStream();
-            Bitmap map = BitmapFactory.decodeStream(is);
-            return map;
+            return BitmapFactory.decodeStream(is);
         }catch (Exception e){
             e.printStackTrace();
         }

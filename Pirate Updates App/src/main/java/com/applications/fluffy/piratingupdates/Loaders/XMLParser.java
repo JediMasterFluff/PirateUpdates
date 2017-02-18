@@ -79,11 +79,10 @@ public class XMLParser extends AsyncTask<Void, Void, Void> {
 
                     objTor.setTitle(getTagValue("title", eElement));
                     objTor.setDescription(getTagValue("description", eElement));
-                    //objTor.setTitle(objTor.getDescription().replaceAll("\\<.*?\\);>", "|"));
+                    objTor.setPosterImgLink(objTor.getDescription().replaceAll("\\<.*?\\>", "|"));
                     objTor.setTorrentWebLink(getTagValue("link", eElement));
                     objTor.setTorrentDownloadLink(getTagAttributes("enclosure", eElement, "//rss/channel/item/enclosure/@url"));
                     objTor.setPubDate(getTagValue("pubDate", eElement));
-                    //objTor.setPosterImgLink(getTagAttributes("description", eElement, "//rss/channel/item/description/img/@src"));
 
                 }
             }
@@ -97,13 +96,15 @@ public class XMLParser extends AsyncTask<Void, Void, Void> {
                 System.out.println("Title is : " + ObjNB.getTitle());
                 System.out.println("Description is : " + ObjNB.getDescription());
                 System.out.println("Link is : " + ObjNB.getTorrentWebLink());
-                System.out.println("Enclosure is : " + ObjNB.getTorrentDownloadLink());
+                System.out.println("Download Link is : " + ObjNB.getTorrentDownloadLink());
                 System.out.println("Pubdate is : " + ObjNB.getPubDate());
-                System.out.println("Image Link is : " + ObjNB.getPosterImgLink());
+                System.out.println("IMDB Rating is : " + ObjNB.getImdbRating());
+                System.out.println("Genre is : " + ObjNB.getGenre());
+                System.out.println("Runtime Link is : " + ObjNB.getRuntime());
+                System.out.println("Size Link is : " + ObjNB.getSize());
 
                 System.out.println();
-                System.out
-                        .println("-------------------------------------------------------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------------------------------------");
 
             }
 
@@ -114,8 +115,7 @@ public class XMLParser extends AsyncTask<Void, Void, Void> {
     }
 
     private String getTagValue(String sTag, Element eElement) {
-        NodeList nlList = eElement.getElementsByTagName(sTag).item(0)
-                .getChildNodes();
+        NodeList nlList = eElement.getElementsByTagName(sTag).item(0).getChildNodes();
 
         Node nValue = nlList.item(0);
 
@@ -136,7 +136,6 @@ public class XMLParser extends AsyncTask<Void, Void, Void> {
         } catch (XPathExpressionException e) {
             e.printStackTrace();
         }
-
 
         return null;
     }
