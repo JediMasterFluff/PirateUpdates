@@ -1,21 +1,22 @@
 package com.applications.fluffy.piratingupdates.Objects;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 /**
  * Created by fluffy on 03/02/17.
  */
 
-@SuppressWarnings("serial")
-public class Torrents implements Serializable {
+public class Torrents implements Parcelable {
     //Attributes
     private String title;
     private String description;
@@ -28,6 +29,8 @@ public class Torrents implements Serializable {
     private String pubDate;
     private String imdbRating;
     private Double rottenRating;
+
+    private byte[] image;
 
     public Torrents() {
         this.title = "";
@@ -166,4 +169,77 @@ public class Torrents implements Serializable {
         this.rottenRating = rottenRating;
     }
 
+    public Bitmap getImage() {
+        return unCompressBitmap(image);
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = compressBitmap(image);
+    }
+
+    private byte[] compressBitmap(Bitmap map){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        map.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
+
+    private Bitmap unCompressBitmap(byte[] byteMap){
+        return BitmapFactory.decodeByteArray(byteMap,0, byteMap.length);
+    }
+
+    protected Torrents(Parcel in) {
+        title = in.readString();
+        description = in.readString();
+        torrentWebLink = in.readString();
+        torrentDownloadLink = in.readString();
+        posterImgLink = in.readString();
+        genre = in.readString();
+        size = in.readString();
+        runtime = in.readString();
+        pubDate = in.readString();
+        imdbRating = in.readString();
+        rottenRating = in.readByte() == 0x00 ? null : in.readDouble();
+        //byte[] _byte = new byte[in.readInt()];
+        image = in.createByteArray();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeString(torrentWebLink);
+        dest.writeString(torrentDownloadLink);
+        dest.writeString(posterImgLink);
+        dest.writeString(genre);
+        dest.writeString(size);
+        dest.writeString(runtime);
+        dest.writeString(pubDate);
+        dest.writeString(imdbRating);
+        if (rottenRating == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeDouble(rottenRating);
+        }
+        //dest.writeInt(image.length);
+        dest.writeByteArray(image);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Torrents> CREATOR = new Parcelable.Creator<Torrents>() {
+        @Override
+        public Torrents createFromParcel(Parcel in) {
+            return new Torrents(in);
+        }
+
+        @Override
+        public Torrents[] newArray(int size) {
+            return new Torrents[size];
+        }
+    };
 }

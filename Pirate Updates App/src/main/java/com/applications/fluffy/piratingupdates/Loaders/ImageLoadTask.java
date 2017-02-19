@@ -1,9 +1,13 @@
 package com.applications.fluffy.piratingupdates.Loaders;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.widget.ImageView;
+
+
+import com.applications.fluffy.piratingupdates.Activities.MainActivity;
+import com.applications.fluffy.piratingupdates.Objects.Torrents;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -18,9 +22,9 @@ import java.net.URL;
 public class ImageLoadTask extends AsyncTask<Void,Void, Bitmap> {
 
     private String url;
-    private ImageView imageView;
+    private Torrents imageView;
 
-    public ImageLoadTask(String url, ImageView imageView) {
+    public ImageLoadTask(String url, Torrents imageView) {
         this.url = url;
         this.imageView = imageView;
     }
@@ -43,6 +47,6 @@ public class ImageLoadTask extends AsyncTask<Void,Void, Bitmap> {
     @Override
     protected void onPostExecute(Bitmap result){
         super.onPostExecute(result);
-        imageView.setImageBitmap(result);
+        imageView.setImage(result);
     }
 }

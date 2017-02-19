@@ -45,8 +45,6 @@ public class TorrentActivity extends AppCompatActivity {
 
         imv = (ImageView)findViewById(R.id.torrent_poster);
 
-        new ImageLoadTask(tor.getPosterImgLink(), imv).execute();
-
         fillTextfields(tor);
 
 //        addListenerOnButton();

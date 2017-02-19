@@ -12,59 +12,19 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.applications.fluffy.piratingupdates.Activities.MainActivity">
 
-    <!--
-    <com.applications.fluffy.piratingupdates.CustomViews.TorrentView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/torrentView" />
--->
-
-    <ListView
-        android:id="@+id/simpleListView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="@string/edit_title"
-        android:ems="10"
-        android:id="@+id/editTitle"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_main_table">
 
-    <Button
-        android:text="Send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:onClick="readRss"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/editTitle"
-        android:layout_toEndOf="@+id/editTitle"
-        android:layout_alignParentTop="true" />
-<!--
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_toStartOf="@+id/button2"
-        android:layout_toLeftOf="@id/button2"
-        android:layout_below="@+id/editTitle"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        >
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-    </GridLayout>
--->
-
-
-
+        </TableLayout>
+    </ScrollView>
 </RelativeLayout>

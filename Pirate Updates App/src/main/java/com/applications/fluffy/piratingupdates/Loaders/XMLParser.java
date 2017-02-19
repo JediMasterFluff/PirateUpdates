@@ -80,14 +80,13 @@ public class XMLParser extends AsyncTask<Void, Void, Vector<Torrents>> {
 
                     objTor.setTitle(getTagValue("title", eElement));
                     objTor.setDescription(getTagValue("description", eElement));
-                    //objTor.setPosterImgLink(objTor.getDescription().replaceAll("\\<.*?\\>", "|"));
                     objTor.setTorrentWebLink(getTagValue("link", eElement));
                     objTor.setTorrentDownloadLink(getTagAttributes("enclosure", eElement, "//rss/channel/item/enclosure/@url"));
                     objTor.setPubDate(getTagValue("pubDate", eElement));
 
                 }
             }
-
+/*
             for (int index1 = 0; index1 < vectParse.size(); index1++) {
                 Torrents ObjNB = vectParse.get(index1);
 
@@ -109,7 +108,7 @@ public class XMLParser extends AsyncTask<Void, Void, Vector<Torrents>> {
                 System.out.println("-------------------------------------------------------------------------------------------------------------");
 
             }
-
+*/
         } catch (Exception e) {
             e.printStackTrace();
         }

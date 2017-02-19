@@ -3,10 +3,12 @@ package com.applications.fluffy.piratingupdates.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 
-import com.applications.fluffy.piratingupdates.Loaders.XMLParser;
 import com.applications.fluffy.piratingupdates.Objects.Torrents;
 import com.applications.fluffy.piratingupdates.R;
 
@@ -14,32 +16,47 @@ import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
-    public final static String EXTRA_MESSAGE = "Torrent Object";
+    private Vector<Torrents> torrentsVector;
+    public final static String EXTRA_MESSAGE = "Torrents Object";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = getIntent();
+
+        torrentsVector = (Vector<Torrents>) intent.getParcelableExtra(SplashScreen.MESSAGE);
+
+        loadTable(torrentsVector);
+
     }
 
-    public void readRss(View view){
+    private void loadTable(Vector<Torrents> torrentsVector) {
+        int index = 0;
+        TableLayout tbl = (TableLayout) findViewById(R.id.activity_main_table);
+        TableRow tr = new TableRow(this);
+        ImageView imageview;
 
-        try {
-            XMLParser parse = new XMLParser();
+        for(Torrents tor : torrentsVector){
+            imageview = new ImageView(this);
+            imageview.setImageBitmap(tor.getImage());
+            imageview.setClickable(true);
+            imageview.setOnClickListener(new View.OnClickListener(){
 
-            parse.execute();
+                @Override
+                public void onClick(View v) {
 
-            Vector<Torrents> vector = parse.get();
-
-            Intent intent = new Intent(this, TorrentActivity.class);
-
-            intent.putExtra(EXTRA_MESSAGE, vector.elementAt(0));
-            startActivity(intent);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+                }
+            } );
+            tr.addView(imageview);
+            tbl.addView(tr, index);
+            index++;
         }
+
+    }
+
+    private void onClick(View view){
 
     }
 
