@@ -41,10 +41,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadTable(ArrayList<Torrents> torrentsArrayList) {
         int index = 0;
+        int colIndex = 0;
+        TableRow tr = new TableRow(this);
 
         for(final Torrents tor : torrentsArrayList){
             TableLayout tbl = (TableLayout) findViewById(R.id.activity_main_table);
-            TableRow tr = new TableRow(this);
+            if(colIndex >= 2) {
+                tr = new TableRow(this);
+                colIndex = 0;
+                index++;
+            }
+
             ImageView imageview;
             imageview = new ImageView(this);
             map = tor.readBitmap();
@@ -60,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             } );
-            tr.addView(imageview);
+            tr.addView(imageview, colIndex);
             tbl.addView(tr, index);
-            index++;
+            colIndex++;
         }
 
     }
