@@ -28,20 +28,20 @@ import javax.xml.xpath.XPathFactory;
  * Created by fluffy on 10/02/17.
  */
 
-public class XMLParser extends AsyncTask<Void, Void, Vector<Torrents>> {
+public class XMLParser extends AsyncTask<Void, Void, ArrayList<Torrents>> {
 
     private Torrents objTor;
-    private Vector<Torrents> vectParse;
+    private ArrayList<Torrents> vectParse;
 
     private int mediaThumbnailCount;
     private boolean urlflag;
     private int count = 0;
 
     @Override
-    protected Vector<Torrents> doInBackground(Void... params) {
+    protected ArrayList<Torrents> doInBackground(Void... params) {
         try {
 
-            vectParse = new Vector<>();
+            vectParse = new ArrayList<>();
             URL url = new URL("https://yts.ag/rss/0/1080p/all/0");
             URLConnection con = url.openConnection();
 
@@ -86,29 +86,7 @@ public class XMLParser extends AsyncTask<Void, Void, Vector<Torrents>> {
 
                 }
             }
-/*
-            for (int index1 = 0; index1 < vectParse.size(); index1++) {
-                Torrents ObjNB = vectParse.get(index1);
 
-                System.out.println("Item No : " + index1);
-                System.out.println();
-
-                System.out.println("Title is : " + ObjNB.getTitle());
-                System.out.println("Description is : " + ObjNB.getDescription());
-                System.out.println("Link is : " + ObjNB.getTorrentWebLink());
-                System.out.println("Download Link is : " + ObjNB.getTorrentDownloadLink());
-                System.out.println("Image Line is : " + ObjNB.getPosterImgLink());
-                System.out.println("Pubdate is : " + ObjNB.getPubDate());
-                System.out.println("IMDB Rating is : " + ObjNB.getImdbRating());
-                System.out.println("Genre is : " + ObjNB.getGenre());
-                System.out.println("Runtime Link is : " + ObjNB.getRuntime());
-                System.out.println("Size Link is : " + ObjNB.getSize());
-
-                System.out.println();
-                System.out.println("-------------------------------------------------------------------------------------------------------------");
-
-            }
-*/
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -142,12 +120,12 @@ public class XMLParser extends AsyncTask<Void, Void, Vector<Torrents>> {
     }
 
     @Override
-    protected void onPostExecute(Vector<Torrents> torrentses) {
+    protected void onPostExecute(ArrayList<Torrents> torrentses) {
         super.onPostExecute(torrentses);
         returnVector(torrentses);
     }
 
-    private Vector<Torrents> returnVector(Vector<Torrents> torrentses) {
+    private ArrayList<Torrents> returnVector(ArrayList<Torrents> torrentses) {
         return torrentses;
     }
 }

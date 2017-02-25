@@ -34,7 +34,7 @@ public class TorrentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_torrent);
 
         Intent intent = getIntent();
-        tor = (Torrents) intent.getSerializableExtra(MainActivity.EXTRA_MESSAGE);
+        tor = intent.getParcelableExtra(MainActivity.EXTRA_MESSAGE);
 
         android.app.ActionBar bar = this.getActionBar();
         this.setTitle(tor.getTitle());
@@ -44,6 +44,7 @@ public class TorrentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_torrent);
 
         imv = (ImageView)findViewById(R.id.torrent_poster);
+        imv.setImageBitmap(tor.readBitmap());
 
         fillTextfields(tor);
 
