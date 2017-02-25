@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 
 import com.applications.fluffy.piratingupdates.Loaders.ImageLoadTask;
@@ -20,7 +23,7 @@ public class SplashScreen extends Activity implements Runnable {
     Thread mThread;
     private Vector<Torrents> torVect;
     Intent intent;
-    public final static String MESSAGE = "TORRENT VECTOR";
+    public final static String MESSAGE = "TORRENT Object";
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -43,9 +46,25 @@ public class SplashScreen extends Activity implements Runnable {
 
             //Create Bitmaps for all torrents
             torVect = createBitmaps(torVect);
-            intent = new Intent(this, MainActivity.class);
-            intent.putExtra(MESSAGE, torVect);
 
+            intent = new Intent(this, MainActivity.class);
+
+//            int index = 0;
+/*
+            for(Torrents tor : torVect){
+                intent.putExtra(MESSAGE + " " + index , tor);
+                System.out.println("~~~~~~~~~~~~~~ Parceable Info ~~~~~~~~~~~~~~");
+                System.out.println("Index - " + index);
+                System.out.println("Parceable Size - " + sizeOf(tor.getImage()));
+                index++;
+            }
+*/
+
+            Bundle bundle = new Bundle();
+
+            bundle.putParcelable("Vector Array Element 0", torVect.elementAt(0));
+            intent.putExtra(MESSAGE, bundle);
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Starting Activity");
             startActivity(intent);
 
             //Thread.sleep(2000);
@@ -82,8 +101,8 @@ public class SplashScreen extends Activity implements Runnable {
         for(Torrents tor : vector){
             ImageLoadTask ilt = new ImageLoadTask(tor.getPosterImgLink(), tor);
             ilt.execute();
-
-            tor.setImage(scaleDownBitmap(ilt.get(),250, getBaseContext()));
+            String path = getBaseContext().getCacheDir().getPath();
+            tor.saveBitmap();
 
         }
         } catch (InterruptedException e) {
@@ -106,4 +125,5 @@ public class SplashScreen extends Activity implements Runnable {
 
         return photo;
     }
+
 }

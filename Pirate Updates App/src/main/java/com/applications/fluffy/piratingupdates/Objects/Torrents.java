@@ -2,10 +2,12 @@ package com.applications.fluffy.piratingupdates.Objects;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Parcel;
-import android.os.Parcelable;
 
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -16,7 +18,7 @@ import java.util.regex.Pattern;
  * Created by fluffy on 03/02/17.
  */
 
-public class Torrents implements Parcelable {
+public class Torrents {
     //Attributes
     private String title;
     private String description;
@@ -30,7 +32,8 @@ public class Torrents implements Parcelable {
     private String imdbRating;
     private Double rottenRating;
 
-    private byte[] image;
+    private Bitmap image;
+    private String imageFile;
 
     public Torrents() {
         this.title = "";
@@ -44,8 +47,8 @@ public class Torrents implements Parcelable {
         this.pubDate = "";
         this.imdbRating = "";
         this.rottenRating = 0.0;
+        this.imageFile = "";
     }
-
     public String getTitle() {
         return title;
     }
@@ -86,8 +89,6 @@ public class Torrents implements Parcelable {
                         break;
                 }
 
-                System.out.println("~~~~~~~~~~~ Substring ~~~~~~~~~~~");
-                System.out.println(str.substring(0, 3));
             }
         }
     }
@@ -170,76 +171,38 @@ public class Torrents implements Parcelable {
     }
 
     public Bitmap getImage() {
-        return unCompressBitmap(image);
+        return image;
     }
 
     public void setImage(Bitmap image) {
-        this.image = compressBitmap(image);
+        this.image = image;
     }
 
-    private byte[] compressBitmap(Bitmap map){
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        map.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        return stream.toByteArray();
-    }
-
-    private Bitmap unCompressBitmap(byte[] byteMap){
-        return BitmapFactory.decodeByteArray(byteMap,0, byteMap.length);
-    }
-
-    protected Torrents(Parcel in) {
-        title = in.readString();
-        description = in.readString();
-        torrentWebLink = in.readString();
-        torrentDownloadLink = in.readString();
-        posterImgLink = in.readString();
-        genre = in.readString();
-        size = in.readString();
-        runtime = in.readString();
-        pubDate = in.readString();
-        imdbRating = in.readString();
-        rottenRating = in.readByte() == 0x00 ? null : in.readDouble();
-        //byte[] _byte = new byte[in.readInt()];
-        image = in.createByteArray();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(title);
-        dest.writeString(description);
-        dest.writeString(torrentWebLink);
-        dest.writeString(torrentDownloadLink);
-        dest.writeString(posterImgLink);
-        dest.writeString(genre);
-        dest.writeString(size);
-        dest.writeString(runtime);
-        dest.writeString(pubDate);
-        dest.writeString(imdbRating);
-        if (rottenRating == null) {
-            dest.writeByte((byte) (0x00));
-        } else {
-            dest.writeByte((byte) (0x01));
-            dest.writeDouble(rottenRating);
+    public void readBitmap(){
+        if(!this.imageFile.isEmpty()) {
+            File file = new File(this.imageFile);
+            BitmapFactory.Options bfo = new BitmapFactory.Options();
+            this.image = BitmapFactory.decodeFile(file.getAbsolutePath(), bfo);
         }
-        //dest.writeInt(image.length);
-        dest.writeByteArray(image);
     }
 
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Torrents> CREATOR = new Parcelable.Creator<Torrents>() {
-        @Override
-        public Torrents createFromParcel(Parcel in) {
-            return new Torrents(in);
-        }
+    public void saveBitmap(String file, Bitmap map){
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(file);
+            map.compress(Bitmap.CompressFormat.PNG, 100, out);// PNG is a lossless format, the compression factor (100) is ignored
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null)
+                    out.close();
 
-        @Override
-        public Torrents[] newArray(int size) {
-            return new Torrents[size];
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            this.imageFile = file;
         }
-    };
+    }
 }
