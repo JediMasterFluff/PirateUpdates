@@ -6,8 +6,11 @@ import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -41,42 +44,49 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadTable(ArrayList<Torrents> torrentsArrayList) {
         int index = 0;
-        int colIndex = 0;
-        TableRow tr = new TableRow(this);
+        int colIndex;
+        TableRow tr;
 
-        for(final Torrents tor : torrentsArrayList){
+        for(int i = 0; i<= torrentsArrayList.size(); i = i + 2){
             TableLayout tbl = (TableLayout) findViewById(R.id.activity_main_table);
-            if(colIndex >= 2) {
-                tr = new TableRow(this);
-                colIndex = 0;
-                index++;
-            }
 
-            ImageView imageview;
-            imageview = new ImageView(this);
-            map = tor.readBitmap();
-            imageview.setImageBitmap(map);
-            imageview.setClickable(true);
-            imageview.setOnClickListener(new View.OnClickListener(){
+            tr = new TableRow(this);
+            for(colIndex = 0; colIndex < 2; colIndex++) {
+                ImageView imageview = new ImageView(this);
 
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this, TorrentActivity.class);
-                    intent.putExtra(EXTRA_MESSAGE, tor);
+                // Make imageview look pretty
+                final float scale = getBaseContext().getResources().getDisplayMetrics().density;
 
-                    startActivity(intent);
+                int height = (int) (200 * scale + 0.5F);
+                int width = (int) (150 * scale + 0.5F);
+                TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(width,height);
+                layoutParams.setMargins(6,6,6,6);
+                imageview.setLayoutParams(layoutParams);
+
+                final Torrents tor;
+                if(colIndex == 0) {
+                    tor = torrentsArrayList.get(i);
                 }
-            } );
-            tr.addView(imageview, colIndex);
+                else {
+                    tor = torrentsArrayList.get(i++);
+                }
+                map = tor.readBitmap();
+                imageview.setImageBitmap(map);
+                imageview.setClickable(true);
+                imageview.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, TorrentActivity.class);
+                        intent.putExtra(EXTRA_MESSAGE, tor);
+
+                        startActivity(intent);
+                    }
+                });
+                tr.addView(imageview, colIndex);
+            }
             tbl.addView(tr, index);
-            colIndex++;
         }
 
     }
-
-    private void onClick(View view){
-
-    }
-
-
 }
