@@ -15,23 +15,24 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <TableLayout
+            android:id="@+id/activity_main_table"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/activity_main_table">
+            android:layout_height="wrap_content">
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="150dp"
                     android:layout_height="200dp"
-                    app:srcCompat="@color/colorPrimaryDark"
-                    android:layout_margin="6dp"/>
+                    android:layout_margin="6dp"
+                    app:srcCompat="@color/colorPrimaryDark" />
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -42,4 +43,5 @@
             </TableRow>
         </TableLayout>
     </ScrollView>
+
 </RelativeLayout>

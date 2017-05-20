@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Pirate Updates App/Pirate Updates App.iml" filepath="$PROJECT_DIR$/Pirate Updates App/Pirate Updates App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PirateUpdates.iml" filepath="$PROJECT_DIR$/PirateUpdates.iml" />
       <module fileurl="file://$PROJECT_DIR$/PiratingUpdates.iml" filepath="$PROJECT_DIR$/PiratingUpdates.iml" />
     </modules>
   </component>
