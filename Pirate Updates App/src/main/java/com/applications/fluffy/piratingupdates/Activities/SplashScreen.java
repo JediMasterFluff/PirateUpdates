@@ -83,7 +83,7 @@ public class SplashScreen extends Activity implements Runnable {
                 ilt.execute();
                 String path = getBaseContext().getCacheDir().getPath();
                 path = path + "/" + tor.getTitle().replace(" ", "");
-
+                System.out.println("[INFO] - PATH TO BITMAP ~" + path);
                 tor.saveBitmap(path, ilt.get());
 
             }

@@ -121,10 +121,10 @@ public class XMLParser extends AsyncTask<Void, Void, ArrayList<Torrents>> {
     @Override
     protected void onPostExecute(ArrayList<Torrents> torrentses) {
         super.onPostExecute(torrentses);
-        returnVector(torrentses);
+        returnList(torrentses);
     }
 
-    private ArrayList<Torrents> returnVector(ArrayList<Torrents> torrentses) {
+    private ArrayList<Torrents> returnList(ArrayList<Torrents> torrentses) {
         return torrentses;
     }
 }
