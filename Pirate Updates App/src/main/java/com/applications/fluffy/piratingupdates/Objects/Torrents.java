@@ -6,10 +6,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -34,7 +35,9 @@ public class Torrents implements Parcelable {
     private String imdbRating;
     private Double rottenRating;
 
-    private String imageFile;
+    private String imageFile; //path to image file on phone
+
+    private final static int charLimit = 300;
 
     public Torrents() {
         this.title = "";
@@ -50,12 +53,13 @@ public class Torrents implements Parcelable {
         this.rottenRating = 0.0;
         this.imageFile = "";
     }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = cleanTitle(title);
     }
 
     public String getDescription() {
@@ -118,7 +122,7 @@ public class Torrents implements Parcelable {
 
         Pattern pattern = Pattern.compile("<img src=(.*?) alt");
         Matcher matcher = pattern.matcher(posterImgLink);
-        if(matcher.find())
+        if (matcher.find())
             this.posterImgLink = matcher.group(1).replace("\"", "");
 
     }
@@ -174,20 +178,24 @@ public class Torrents implements Parcelable {
     /**
      * @return A Bitmap image from the Torrent object imagefile path
      */
-    public Bitmap readBitmap(){
+    public Bitmap readBitmap() throws IOException {
 
-        Bitmap image;
-        if(!this.imageFile.isEmpty()) {
+        if (!this.imageFile.isEmpty()) {
             File file = new File(this.imageFile);
             BitmapFactory.Options bfo = new BitmapFactory.Options();
-            image = BitmapFactory.decodeFile(file.getAbsolutePath(), bfo);
-            return image;
+            return BitmapFactory.decodeFile(file.getAbsolutePath(), bfo);
+        } else {
+            URL conn = new URL(this.posterImgLink);
+            HttpURLConnection httpConn = (HttpURLConnection) conn.openConnection();
+            httpConn.setDoInput(true);
+            httpConn.connect();
+            InputStream is = httpConn.getInputStream();
+            return BitmapFactory.decodeStream(is);
         }
 
-        return null;
     }
 
-    public void saveBitmap(String file, Bitmap map){
+    public void saveBitmap(String file, Bitmap map) {
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(file);
@@ -260,4 +268,18 @@ public class Torrents implements Parcelable {
             return new Torrents[size];
         }
     };
+
+    private String cleanTitle(String title) {
+        int index = 0;
+
+        index = title.indexOf("(", 0);
+        return title.substring(0, index);
+    }
+
+    public String shortDesc() {
+        if (description.length() > charLimit) {
+            return this.description.substring(0, charLimit) + "...";
+        } else
+            return this.description;
+    }
 }

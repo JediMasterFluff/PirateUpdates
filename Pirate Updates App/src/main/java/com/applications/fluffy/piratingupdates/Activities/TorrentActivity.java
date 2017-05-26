@@ -2,19 +2,16 @@ package com.applications.fluffy.piratingupdates.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.applications.fluffy.piratingupdates.Loaders.ImageLoadTask;
+import com.applications.fluffy.piratingupdates.Helpers.TorrentRVAdapter;
 import com.applications.fluffy.piratingupdates.Objects.Torrents;
 import com.applications.fluffy.piratingupdates.R;
 import com.google.android.gms.common.api.GoogleApiClient;
-
-import org.w3c.dom.Text;
 
 public class TorrentActivity extends AppCompatActivity {
 
@@ -34,7 +31,7 @@ public class TorrentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_torrent);
 
         Intent intent = getIntent();
-        tor = intent.getParcelableExtra(MainActivity.EXTRA_MESSAGE);
+        tor = intent.getParcelableExtra(TorrentRVAdapter.EXTRA_MESSAGE);
 
         android.app.ActionBar bar = this.getActionBar();
         this.setTitle(tor.getTitle());
@@ -44,7 +41,7 @@ public class TorrentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_torrent);
 
         imv = (ImageView)findViewById(R.id.torrent_poster);
-        imv.setImageBitmap(tor.readBitmap());
+        // imv.setImageBitmap(tor.readBitmap());
 
         fillTextfields(tor);
 

@@ -1,4 +1,4 @@
-package com.applications.fluffy.piratingupdates.Loaders;
+package com.applications.fluffy.piratingupdates.Helpers;
 
 import android.os.AsyncTask;
 
@@ -15,7 +15,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -122,10 +121,10 @@ public class XMLParser extends AsyncTask<Void, Void, ArrayList<Torrents>> {
     @Override
     protected void onPostExecute(ArrayList<Torrents> torrentses) {
         super.onPostExecute(torrentses);
-        returnVector(torrentses);
+        returnList(torrentses);
     }
 
-    private ArrayList<Torrents> returnVector(ArrayList<Torrents> torrentses) {
+    private ArrayList<Torrents> returnList(ArrayList<Torrents> torrentses) {
         return torrentses;
     }
 }

@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.applications.fluffy.piratingupdates.Loaders.ImageLoadTask;
-import com.applications.fluffy.piratingupdates.Loaders.XMLParser;
+import com.applications.fluffy.piratingupdates.Helpers.ImageLoadTask;
+import com.applications.fluffy.piratingupdates.Helpers.XMLParser;
 import com.applications.fluffy.piratingupdates.Objects.Torrents;
 import com.applications.fluffy.piratingupdates.R;
 
@@ -62,15 +62,13 @@ public class SplashScreen extends Activity implements Runnable {
     }
 
     private ArrayList<Torrents> readRss(){
-        ArrayList<Torrents> list = new ArrayList<Torrents>();
+        ArrayList<Torrents> list = new ArrayList<>();
         try {
             XMLParser parse = new XMLParser();
             parse.execute();
             list = parse.get();
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
@@ -85,13 +83,11 @@ public class SplashScreen extends Activity implements Runnable {
                 ilt.execute();
                 String path = getBaseContext().getCacheDir().getPath();
                 path = path + "/" + tor.getTitle().replace(" ", "");
-
+                System.out.println("[INFO] - PATH TO BITMAP ~" + path);
                 tor.saveBitmap(path, ilt.get());
 
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
