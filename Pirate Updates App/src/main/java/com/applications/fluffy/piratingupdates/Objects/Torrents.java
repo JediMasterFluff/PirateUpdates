@@ -53,6 +53,7 @@ public class Torrents implements Parcelable {
         this.rottenRating = 0.0;
         this.imageFile = "";
     }
+
     public String getTitle() {
         return title;
     }
@@ -121,7 +122,7 @@ public class Torrents implements Parcelable {
 
         Pattern pattern = Pattern.compile("<img src=(.*?) alt");
         Matcher matcher = pattern.matcher(posterImgLink);
-        if(matcher.find())
+        if (matcher.find())
             this.posterImgLink = matcher.group(1).replace("\"", "");
 
     }
@@ -179,7 +180,7 @@ public class Torrents implements Parcelable {
      */
     public Bitmap readBitmap() throws IOException {
 
-        if(!this.imageFile.isEmpty()) {
+        if (!this.imageFile.isEmpty()) {
             File file = new File(this.imageFile);
             BitmapFactory.Options bfo = new BitmapFactory.Options();
             return BitmapFactory.decodeFile(file.getAbsolutePath(), bfo);
@@ -194,7 +195,7 @@ public class Torrents implements Parcelable {
 
     }
 
-    public void saveBitmap(String file, Bitmap map){
+    public void saveBitmap(String file, Bitmap map) {
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(file);
