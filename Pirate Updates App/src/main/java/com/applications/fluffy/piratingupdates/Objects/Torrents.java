@@ -53,7 +53,6 @@ public class Torrents implements Parcelable {
         this.rottenRating = 0.0;
         this.imageFile = "";
     }
-
     public String getTitle() {
         return title;
     }
