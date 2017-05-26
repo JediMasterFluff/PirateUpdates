@@ -2,28 +2,19 @@ package com.applications.fluffy.piratingupdates.Activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.util.TypedValue;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
+import com.applications.fluffy.piratingupdates.Helpers.TorrentRVAdapter;
 import com.applications.fluffy.piratingupdates.Objects.Torrents;
 import com.applications.fluffy.piratingupdates.R;
 
 import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.Vector;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<Torrents> torrentsVector;
+    private ArrayList<Torrents> torrentsList;
     public final static String EXTRA_MESSAGE = "Torrents Object";
     public Bitmap map;
 
@@ -36,12 +27,20 @@ public class MainActivity extends AppCompatActivity {
 
         Bundle b = intent.getBundleExtra(SplashScreen.MESSAGE);
 
-        torrentsVector = b.getParcelableArrayList(SplashScreen.MESSAGE);
+        torrentsList = b.getParcelableArrayList(SplashScreen.MESSAGE);
 
-        loadTable(torrentsVector);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.activity_main);
+
+        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+        rv.setLayoutManager(llm);
+
+        TorrentRVAdapter adapter = new TorrentRVAdapter(torrentsList);
+        rv.setAdapter(adapter);
+
+        //loadTable(torrentsVector);
 
     }
-
+/*
     private void loadTable(ArrayList<Torrents> torrentsArrayList) {
         int index = 0;
         int colIndex;
@@ -89,4 +88,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    */
 }

@@ -2,19 +2,15 @@ package com.applications.fluffy.piratingupdates.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.applications.fluffy.piratingupdates.Loaders.ImageLoadTask;
 import com.applications.fluffy.piratingupdates.Objects.Torrents;
 import com.applications.fluffy.piratingupdates.R;
 import com.google.android.gms.common.api.GoogleApiClient;
-
-import org.w3c.dom.Text;
 
 public class TorrentActivity extends AppCompatActivity {
 

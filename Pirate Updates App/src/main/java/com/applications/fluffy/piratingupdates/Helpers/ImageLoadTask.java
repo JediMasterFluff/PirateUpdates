@@ -1,12 +1,9 @@
-package com.applications.fluffy.piratingupdates.Loaders;
+package com.applications.fluffy.piratingupdates.Helpers;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
-
-import com.applications.fluffy.piratingupdates.Activities.MainActivity;
 import com.applications.fluffy.piratingupdates.Objects.Torrents;
 
 import java.io.InputStream;
