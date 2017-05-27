@@ -19,7 +19,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@color/colorPrimaryDark"
         app:columnCount="2"
         app:orientation="vertical"
         app:rowCount="3">
@@ -36,7 +35,6 @@
         <TableLayout
             android:id="@+id/torrent_detail_table"
             android:layout_width="wrap_content"
-            android:background="@android:color/holo_blue_bright"
             android:clickable="false"
             android:cursorVisible="false"
             android:focusable="false"
@@ -159,7 +157,6 @@
             android:id="@+id/torrent_desc"
             android:layout_width="match_parent"
             android:layout_height="172dp"
-            android:background="@android:color/holo_purple"
             android:clickable="false"
             android:cursorVisible="false"
             android:focusable="false"

@@ -1,5 +1,6 @@
 package com.applications.fluffy.piratingupdates.Activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -22,6 +23,9 @@ public class MainActivity extends Activity {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
+        ActionBar actionBar = getActionBar();
+
+        actionBar.setTitle("");
 
         Intent intent = getIntent();
         Bundle b = intent.getBundleExtra(SplashScreen.MESSAGE);

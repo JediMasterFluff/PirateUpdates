@@ -29,7 +29,7 @@
         <activity
             android:name=".Activities.SplashScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@android:style/Theme.Material.NoActionBar.Fullscreen">
             <intent-filter> <!-- THIS ALLOWS ME TO RUN THE SPLASH SCREEN ON LOAD -->
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

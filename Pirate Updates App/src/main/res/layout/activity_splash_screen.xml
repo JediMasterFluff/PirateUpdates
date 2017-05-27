@@ -3,7 +3,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     tools:context="com.applications.fluffy.piratingupdates.Activities.SplashScreen">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -16,7 +15,6 @@
         android:gravity="center"
         android:keepScreenOn="true"
         android:text="@string/SplashString"
-        android:textColor="@color/linkPurple"
         android:textSize="40sp"
         android:textStyle="bold" />
 
@@ -33,7 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
             android:orientation="horizontal"
             tools:ignore="UselessParent">
 
