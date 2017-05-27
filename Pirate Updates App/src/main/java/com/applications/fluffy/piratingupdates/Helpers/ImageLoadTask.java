@@ -19,12 +19,11 @@ import java.net.URL;
 
 public class ImageLoadTask extends AsyncTask<Void,Void, Bitmap> {
 
-    private String url;
-    private Torrents imageView;
+    private final String url;
 
     public ImageLoadTask(String url, Torrents imageView) {
         this.url = url;
-        this.imageView = imageView;
+        Torrents imageView1 = imageView;
     }
 
     @Override

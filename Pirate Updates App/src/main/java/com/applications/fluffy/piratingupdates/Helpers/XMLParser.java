@@ -29,12 +29,7 @@ import javax.xml.xpath.XPathFactory;
 
 public class XMLParser extends AsyncTask<Void, Void, ArrayList<Torrents>> {
 
-    private Torrents objTor;
     private ArrayList<Torrents> vectParse;
-
-    private int mediaThumbnailCount;
-    private boolean urlflag;
-    private int count = 0;
 
     @Override
     protected ArrayList<Torrents> doInBackground(Void... params) {
@@ -74,13 +69,13 @@ public class XMLParser extends AsyncTask<Void, Void, ArrayList<Torrents>> {
 
                     Element eElement = (Element) nNode;
 
-                    objTor = new Torrents();
+                    Torrents objTor = new Torrents();
                     vectParse.add(objTor);
 
                     objTor.setTitle(getTagValue("title", eElement));
                     objTor.setDescription(getTagValue("description", eElement));
                     objTor.setTorrentWebLink(getTagValue("link", eElement));
-                    objTor.setTorrentDownloadLink(getTagAttributes("enclosure", eElement, "//rss/channel/item/enclosure/@url"));
+                    objTor.setTorrentDownloadLink(getTagAttributes(eElement));
                     objTor.setPubDate(getTagValue("pubDate", eElement));
 
                 }
@@ -101,12 +96,12 @@ public class XMLParser extends AsyncTask<Void, Void, ArrayList<Torrents>> {
 
     }
 
-    private String getTagAttributes(String sTag, Element eElement, String path) {
+    private String getTagAttributes(Element eElement) {
 
         XPath xpath =  XPathFactory.newInstance().newXPath();
 
         try {
-            NodeList node = (NodeList) xpath.evaluate(path, eElement, XPathConstants.NODESET);
+            NodeList node = (NodeList) xpath.evaluate("//rss/channel/item/enclosure/@url", eElement, XPathConstants.NODESET);
             Node nValue = node.item(0);
 
             return nValue.getNodeValue();

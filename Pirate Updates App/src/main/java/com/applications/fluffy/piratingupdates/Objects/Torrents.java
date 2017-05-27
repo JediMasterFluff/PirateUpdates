@@ -269,7 +269,7 @@ public class Torrents implements Parcelable {
     };
 
     private String cleanTitle(String title) {
-        int index = 0;
+        int index;
 
         index = title.indexOf("(", 0);
         return title.substring(0, index);

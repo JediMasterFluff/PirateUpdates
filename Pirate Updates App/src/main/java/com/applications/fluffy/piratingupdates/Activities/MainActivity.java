@@ -20,8 +20,7 @@ import java.util.ArrayList;
 import static com.applications.fluffy.piratingupdates.Helpers.TorrentRVAdapter.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<Torrents> torrentsList;
-    public Bitmap map;
+    private Bitmap map;
 
     public MainActivity returnActivity() {
         return this;
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle b = intent.getBundleExtra(SplashScreen.MESSAGE);
-        torrentsList = b.getParcelableArrayList(SplashScreen.MESSAGE);
+        ArrayList<Torrents> torrentsList = b.getParcelableArrayList(SplashScreen.MESSAGE);
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.activity_main);
 

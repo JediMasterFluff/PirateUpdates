@@ -14,9 +14,8 @@ import java.util.concurrent.ExecutionException;
 
 
 public class SplashScreen extends Activity implements Runnable {
-    Thread mThread;
-    private ArrayList<Torrents> torrentsArrayList;
-    Intent intent;
+    private Thread mThread;
+    private Intent intent;
     public final static String MESSAGE = "TORRENT Vector";
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,7 +35,7 @@ public class SplashScreen extends Activity implements Runnable {
         try
         {
             //Read RSS Feed(s)
-            torrentsArrayList = readRss();
+            ArrayList<Torrents> torrentsArrayList = readRss();
 
             //Create Bitmaps for all torrents
             torrentsArrayList = createBitmaps(torrentsArrayList);

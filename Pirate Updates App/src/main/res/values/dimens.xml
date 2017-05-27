@@ -6,4 +6,5 @@
     <dimen name="SmallText">12sp</dimen>
     <dimen name="MediumText">15sp</dimen>
     <dimen name="LargeText">20sp</dimen>
+    <dimen name="row_height">20dp</dimen>
 </resources>

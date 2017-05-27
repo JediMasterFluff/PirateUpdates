@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class TorrentRVAdapter extends RecyclerView.Adapter<TorrentRVAdapter.TorrentViewHolder> {
 
-    private ArrayList<Torrents> torrents;
+    private final ArrayList<Torrents> torrents;
     public final static String EXTRA_MESSAGE = "Torrents Object";
     private Bitmap map;
     public TorrentRVAdapter(ArrayList<Torrents> torrents) {
@@ -33,11 +33,11 @@ public class TorrentRVAdapter extends RecyclerView.Adapter<TorrentRVAdapter.Torr
 
 
     static class TorrentViewHolder extends RecyclerView.ViewHolder {
-        CardView cv;
-        TextView title;
-        TextView genre;
-        TextView desc;
-        ImageView poster;
+        final CardView cv;
+        final TextView title;
+        final TextView genre;
+        final TextView desc;
+        final ImageView poster;
 
         TorrentViewHolder(View view) {
             super(view);
@@ -88,12 +88,8 @@ public class TorrentRVAdapter extends RecyclerView.Adapter<TorrentRVAdapter.Torr
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-    }
-
-    @Override
     public int getItemCount() {
         return torrents.size();
     }
+
 }
