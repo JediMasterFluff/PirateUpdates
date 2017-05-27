@@ -16,12 +16,4 @@
         <attr name="exampleDrawable" format="color|reference" />
     </declare-styleable>
 
-    <declare-styleable name="testView">
-        <attr name="showText" format="boolean"/>
-        <attr name="labelPosition" format="enum">
-            <enum name="left" value="0"/>
-            <enum name="right" value="1"/>
-        </attr>
-        <attr name="labelText" format="string"/>
-    </declare-styleable>
 </resources>

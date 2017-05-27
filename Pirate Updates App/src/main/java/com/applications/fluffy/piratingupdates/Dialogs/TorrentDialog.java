@@ -33,8 +33,6 @@ public class TorrentDialog extends android.support.v7.app.AppCompatDialogFragmen
         Toolbar tb = (Toolbar) rootView.findViewById(R.id.toolbar);
         tb.setTitle("Dialog Title");
 
-        ((AppCompatActivity) getActivity()).setSupportActionBar(tb);
-
         ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
@@ -66,13 +64,7 @@ public class TorrentDialog extends android.support.v7.app.AppCompatDialogFragmen
         return super.onOptionsItemSelected(item);
     }
 /*
-    public void showDialog() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        TorrentDialog newFragment = new TorrentDialog();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.add(android.R.id.content, newFragment).addToBackStack(null).commit();
-    }
+
 
    */
 }

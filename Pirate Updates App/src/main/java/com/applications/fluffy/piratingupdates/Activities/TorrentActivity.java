@@ -1,8 +1,8 @@
 package com.applications.fluffy.piratingupdates.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,14 +12,15 @@ import com.applications.fluffy.piratingupdates.R;
 
 import java.io.IOException;
 
-public class TorrentActivity extends AppCompatActivity {
+public class TorrentActivity extends Activity {
 
     private ImageView imv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_torrent);
+        //setContentView(R.layout.activity_torrent);
+        //showDialog();
 
         Intent intent = getIntent();
         Torrents tor = intent.getParcelableExtra(TorrentRVAdapter.EXTRA_MESSAGE);
@@ -39,8 +40,6 @@ public class TorrentActivity extends AppCompatActivity {
         }
 
         fillTextfields(tor);
-
-//        addListenerOnButton();
     }
 
     private void fillTextfields(Torrents obj){
@@ -59,7 +58,15 @@ public class TorrentActivity extends AppCompatActivity {
         desc.setText(obj.getDescription());
        // pubdate.setText(obj.getPubDate());
     }
-
+/*
+    public void showDialog() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        TorrentDialog newFragment = new TorrentDialog();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.add(android.R.id.content, newFragment).addToBackStack(null).commit();
+    }
+*/
 }
 
 
