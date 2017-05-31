@@ -9,7 +9,7 @@
     <string name="rating">Rating:</string>
     <string name="download">Download</string>
     <string name="genre">Genre:</string>
-    <string name="publication_date">PubDate:</string>
+    <string name="publication_date">Published:</string>
     <string name="runtime">Runtime:</string>
     <string name="size">Size:</string>
     <string name="torrent_image_poster_here">Torrent Image Poster Here</string>

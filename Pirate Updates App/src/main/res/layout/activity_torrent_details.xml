@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/details_container">
+
+    <TableRow>
+        <!-- Rating -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rating"
+            android:id="@+id/rating_label" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/torrent_details_rating" />
+    </TableRow>
+
+    <TableRow>
+        <!-- Genre -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/genre_label"
+            android:text="@string/genre" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/torrent_details_genre" />
+
+    </TableRow>
+
+    <TableRow>
+        <!-- Runtime -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/runtime_label"
+            android:text="@string/runtime" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/torrent_details_runtime" />
+
+    </TableRow>
+
+    <TableRow>
+        <!-- Size -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/size_label"
+            android:text="@string/size" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/torrent_details_size" />
+
+    </TableRow>
+
+    <TableRow>
+        <!-- Publish Date -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pub_label"
+            android:text="@string/publication_date" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/torrent_details_pubDate" />
+    </TableRow>
+
+</TableLayout>

@@ -59,7 +59,7 @@ public class TorrentRVAdapter extends RecyclerView.Adapter<TorrentRVAdapter.Torr
     @Override
     public void onBindViewHolder(TorrentViewHolder holder, int i) {
 
-        holder.desc.setText(torrents.get(i).shortDesc());
+        holder.desc.setText(torrents.get(i).getDescription());
         holder.genre.setText(torrents.get(i).getGenre());
         holder.title.setText(torrents.get(i).getTitle());
 

@@ -19,16 +19,13 @@ public class TorrentActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_torrent);
+        setContentView(R.layout.activity_torrent);
         //showDialog();
 
         Intent intent = getIntent();
         Torrents tor = intent.getParcelableExtra(TorrentRVAdapter.EXTRA_MESSAGE);
 
-        android.app.ActionBar bar = this.getActionBar();
         this.setTitle(tor.getTitle());
-
-//        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#A123A1")));
 
         setContentView(R.layout.activity_torrent);
 
@@ -42,31 +39,22 @@ public class TorrentActivity extends Activity {
         fillTextfields(tor);
     }
 
-    private void fillTextfields(Torrents obj){
+    private void fillTextfields(Torrents obj) {
         TextView genre, imdb, runtime, size, desc, pubdate;
-        genre = (TextView) findViewById(R.id.genre);
-        imdb = (TextView) findViewById(R.id.imdbRating);
-        runtime = (TextView)findViewById(R.id.runtime);
-        size = (TextView) findViewById(R.id.size);
+        genre = (TextView) findViewById(R.id.torrent_details_genre);
+        imdb = (TextView) findViewById(R.id.torrent_details_rating);
+        runtime = (TextView) findViewById(R.id.torrent_details_runtime);
+        size = (TextView) findViewById(R.id.torrent_details_size);
         desc = (TextView) findViewById(R.id.torrent_desc);
-        pubdate = (TextView)findViewById(R.id.pubdate);
+        pubdate = (TextView) findViewById(R.id.torrent_details_pubDate);
 
         genre.setText(obj.getGenre());
         imdb.setText(obj.getImdbRating());
         runtime.setText(obj.getRuntime());
         size.setText(obj.getSize());
         desc.setText(obj.getDescription());
-       // pubdate.setText(obj.getPubDate());
+        pubdate.setText(obj.getPubDate());
     }
-/*
-    public void showDialog() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        TorrentDialog newFragment = new TorrentDialog();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.add(android.R.id.content, newFragment).addToBackStack(null).commit();
-    }
-*/
 }
 
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_torrent"
     android:layout_width="match_parent"
@@ -13,150 +12,39 @@
     tools:context="com.applications.fluffy.piratingupdates.Activities.TorrentActivity"
     tools:ignore="Overdraw">
 
-    <android.support.v7.widget.GridLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        app:columnCount="2"
-        app:orientation="vertical"
-        app:rowCount="3">
+        android:id="@+id/torrent_container">
 
         <ImageView
             android:id="@+id/torrent_poster"
             android:layout_width="173dp"
             android:layout_height="260dp"
-            android:contentDescription="@string/torrent_image_poster_here"
-            app:layout_column="0"
-            app:layout_gravity="top|left|fill_horizontal"
-            app:layout_row="0" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="15dp"
+            android:contentDescription="@string/torrent_image_poster_here" />
 
-        <TableLayout
-            android:id="@+id/torrent_detail_table"
-            android:layout_width="wrap_content"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="6dp"
-            android:paddingTop="15dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="6dp"
-            app:layout_column="1"
-            app:layout_gravity="top|right|fill_horizontal"
-            app:layout_row="0">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@id/torrent_poster"
+            android:layout_toEndOf="@+id/torrent_poster">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="start"
-                android:textAlignment="textStart"
-                android:weightSum="2">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/rating" />
-
-                <TextView
-                    android:id="@+id/imdbRating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    tools:ignore="RtlHardcoded" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="start"
-                android:textAlignment="textStart"
-                android:weightSum="2">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/genre" />
-
-                <EditText
-                    android:id="@+id/genre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:gravity="end"
-                    android:inputType="none"
-                    android:padding="6dp" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="start"
-                android:textAlignment="textStart"
-                android:weightSum="2">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/runtime" />
-
-                <TextView
-                    android:id="@+id/runtime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="end" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="start"
-                android:textAlignment="textStart"
-                android:weightSum="2">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/size" />
-
-                <TextView
-                    android:id="@+id/size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="end" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="start"
-                android:textAlignment="textStart"
-                android:weightSum="2">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/publication_date" />
-
-                <TextView
-                    android:id="@+id/pubdate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="end" />
-            </TableRow>
-        </TableLayout>
+            <include
+                android:id="@+id/include"
+                layout="@layout/activity_torrent_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </android.support.constraint.ConstraintLayout>
 
         <EditText
             android:id="@+id/torrent_desc"
             android:layout_width="match_parent"
-            android:layout_height="172dp"
+            android:layout_height="match_parent"
+            android:layout_below="@id/torrent_poster"
             android:clickable="false"
             android:cursorVisible="false"
             android:focusable="false"
@@ -164,20 +52,16 @@
             android:inputType="none"
             android:padding="6dp"
             android:text="@string/desc"
-            app:layout_column="0"
-            app:layout_columnSpan="2"
-            app:layout_gravity="center|fill"
-            app:layout_row="1" />
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="@dimen/btn_height"
+            android:background="@android:color/transparent" />
 
         <Button
             android:id="@+id/torrent_download"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/btn_height"
             android:text="@string/download"
-            app:layout_column="0"
-            app:layout_columnSpan="2"
-            app:layout_gravity="bottom"
-            app:layout_row="2" />
+            android:layout_alignParentBottom="true" />
 
-    </android.support.v7.widget.GridLayout>
-</RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
