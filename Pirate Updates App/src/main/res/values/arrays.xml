@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="feeds">
+        <item>https://yts.ag/rss/0/1080p/all/0</item>
+    </string-array>
+</resources>

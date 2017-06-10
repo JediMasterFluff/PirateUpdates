@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="General">
+        <ListPreference
+            android:title="RSS Feeds"
+            android:entries="@array/feeds"
+            android:key="rssFeeds"></ListPreference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Networking">
+        <EditTextPreference
+            android:title="Server Address"
+            android:defaultValue="@string/server_address"
+            android:key="serverAddress"></EditTextPreference>
+        <EditTextPreference
+            android:title="Port"
+            android:defaultValue="@string/server_port"
+            android:key="port">
+
+        </EditTextPreference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

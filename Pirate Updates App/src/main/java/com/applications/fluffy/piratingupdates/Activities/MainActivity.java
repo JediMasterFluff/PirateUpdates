@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.applications.fluffy.piratingupdates.Helpers.TorrentRVAdapter;
+import com.applications.fluffy.piratingupdates.Objects.Preferences;
 import com.applications.fluffy.piratingupdates.Objects.Torrents;
 import com.applications.fluffy.piratingupdates.R;
 
@@ -49,9 +50,10 @@ public class MainActivity extends Activity {
     }
 
     private void CreateMenu(Menu menu) {
+        // Start preference activity
         MenuItem add = menu.add(0, 0, 0, "Add RSS Feed");
         {
-            add.setIcon(R.drawable.ic_add_feed);
+            add.setIcon(R.drawable.ic_settings_white);
             add.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
     }
@@ -60,8 +62,8 @@ public class MainActivity extends Activity {
 
         switch (item.getItemId()) {
             case 0:
-                // Will need to start an activity to save a new RSS feed URL
-                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                //Open Preferences Screen
+                startActivity(new Intent(this, Preferences.class));
                 return true;
             default:
                 Toast.makeText(this, "Not working", Toast.LENGTH_SHORT).show();
